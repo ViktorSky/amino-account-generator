@@ -159,7 +159,6 @@ class Client:
                 elif response.status_code in [400]:
                     if "3 accounts" in response.json()["api:message"]:
                         raise LimitationError(response.json())
-                    #print(response.status_code, response.json()["api:statuscode"])
                     raise TooManyRequests(response.json())
                 raise Exception([response.status_code, response.text])
             return response
@@ -356,7 +355,6 @@ class AccountGenerator:
         captcha: str,
         session: object = Session()
     ) -> str:
-        #return 123456
         return session.post(
             "https://captchasolver.neodouglas.repl.co/predict",
             data = {"image": captcha}
@@ -385,7 +383,7 @@ def get_proxies() -> object:
 
 
 if __name__ == "__main__":
-    #Thread(target=run).start()
+    Thread(target=run).start()
     sleep(2); clear()
     save_path_name = full_path(parameters["save-path"])
     try: accounts: list = loads(open(save_path_name).read())
