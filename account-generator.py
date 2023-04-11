@@ -33,8 +33,8 @@ finally:
 
 
 PREFIX = "19"
-SIGKEY = "f8e7a61ac3f725941e3ac7cae2d688be97f30b93"
-DEVKEY = "02b258c63559d8804321c5d5065af320358d366f"
+SIGKEY = "dfa5ed192dda6e88a12fe12130dc6206b1251e44"
+DEVKEY = "e7309ecc0953c6fa60005b2765f99dbbc965c8e9"
 
 
 #-----------------FLASK-APP-----------------
