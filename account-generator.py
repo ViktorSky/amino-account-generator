@@ -32,8 +32,9 @@ finally:
     from secmail import SecMail
 
 
-signatureKey="f8e7a61ac3f725941e3ac7cae2d688be97f30b93"
-deviceKey="02b258c63559d8804321c5d5065af320358d366f"
+PREFIX = "19"
+SIGKEY = "f8e7a61ac3f725941e3ac7cae2d688be97f30b93"
+DEVKEY = "02b258c63559d8804321c5d5065af320358d366f"
 
 
 #-----------------FLASK-APP-----------------
@@ -72,7 +73,7 @@ class Client:
     uuid = None
 
     def __init__(
-        self: object,
+        self,
         device: str = None,
         proxies: dict = None
     ) -> None:
@@ -84,13 +85,13 @@ class Client:
 
 
     def device_gen(
-        self: object,
-        device_info: bytes = bytes.fromhex("42") + os.urandom(20)
+        self,
+        id: bytes = os.urandom(20)
     ) -> str:
-
+        devive_info: bytes = bytes.fromhex(PREFIX) + id
         new_device: str = (
             device_info + new(
-                bytes.fromhex(deviceKey),
+                bytes.fromhex(DEVKEY),
                 device_info,
                 sha1
             ).digest()
@@ -99,13 +100,13 @@ class Client:
 
 
     def sig(
-        self: object,
+        self,
         data: str = None
     ) -> str:
 
         signature: str = b64encode(
-            bytes.fromhex("42") + new(
-                bytes.fromhex(signatureKey),
+            bytes.fromhex(PREFIX) + new(
+                bytes.fromhex(SIGKEY),
                 data.encode("utf-8"),
                 sha1
             ).digest()
@@ -121,14 +122,14 @@ class Client:
         headers = {
             "NDCDEVICEID": self.device,
             "SMDEVICEID": self.uuid,
-            "Accept-Language": "en-EN",
+            "Accept-Language": "en-US",
             "Content-Type":
-                "application/json; charset=utf-8",
+                "application/x-www-form-urlencoded; charset=utf-8",
             "User-Agent":
-                'Dalvik/2.1.0 (Linux; U; Android 7.1; LG-UK495 Build/MRA58K; com.narvii.amino.master/3.3.33180)', 
+                'Apple iPhone12,1 iOS v15.5 Main/3.12.2', 
             "Host": "service.narvii.com",
             "Accept-Encoding": "gzip",
-            "Connection": "keep-alive"
+            "Connection": "Keep-Alive"
         }
         if data is not None:
             headers["Content-Length"] = str(len(data))
