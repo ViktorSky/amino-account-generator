@@ -88,7 +88,7 @@ class Client:
         self,
         id: bytes = os.urandom(20)
     ) -> str:
-        devive_info: bytes = bytes.fromhex(PREFIX) + id
+        device_info: bytes = bytes.fromhex(PREFIX) + id
         new_device: str = (
             device_info + new(
                 bytes.fromhex(DEVKEY),
