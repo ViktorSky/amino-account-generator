@@ -115,7 +115,7 @@ class Client:
 
 
     def headers(
-        self: object,
+        self,
         data: str = None
     ) -> dict:
 
@@ -140,7 +140,7 @@ class Client:
 
 
     def request(
-        self: object,
+        self,
         method: ["DELETE", "GET", "POST", "PUT"],
         url: str = "",
         data: str = None,
@@ -166,7 +166,7 @@ class Client:
 
 
     def register(
-        self: object,
+        self,
         email: str,
         password: str,
         nickname: str,
@@ -203,7 +203,7 @@ class Client:
 
 
     def request_verify_code(
-        self: object,
+        self,
         email: str,
         password: bool = False
     ) -> dict:
@@ -228,7 +228,7 @@ class Client:
 
 
     def login(
-        self: object,
+        self,
         email: str,
         password: str
     ) -> dict:
@@ -265,7 +265,7 @@ class AccountGenerator:
     device = None
 
     def __init__(
-        self: object,
+        self,
         proxies: dict = None
     ) -> None:
 
@@ -305,7 +305,7 @@ class AccountGenerator:
 
 
     def get_new_email(
-        self: object,
+        self,
         count: int=None
     ) -> str:
         return SecMail().generate_email(
@@ -314,7 +314,7 @@ class AccountGenerator:
 
 
     def get_new_password(
-        self: object,
+        self,
         length: int = 6,
         characters = list(ascii_letters + digits + "@#&"*2)
     ) -> str:
@@ -323,20 +323,13 @@ class AccountGenerator:
         return "".join(choice(characters) for _ in range(int(length)))
 
 
-    def get_new_nickname(
-        self: object
-    ) -> str:
-
+    def get_new_nickname(self) -> str:
         return names.get_full_name(
             gender = choice(["male", "female"])
         )
 
 
-    def get_captcha(
-        self: object,
-        email: str
-    ) -> str:
-
+    def get_captcha(self, email: str) -> str:
         inbox = SecMail().get_messages(email = email)
         for id in inbox.id:
             with suppress(Exception):
@@ -352,7 +345,7 @@ class AccountGenerator:
 
 
     def captcha_solver(
-        self: object,
+        self,
         captcha: str,
         session: object = Session()
     ) -> str:
