@@ -350,9 +350,8 @@ class AccountGenerator:
         session: object = Session()
     ) -> str:
         return session.post(
-            "https://captchasolver.neodouglas.repl.co/predict",
-            data = {"image": captcha}
-        ).json()['captcha'][0]
+            "https://captcha-solver-iukzq.run-eu-central1.goorm.app/predict", json={"url": captcha}
+        ).json()['prediction']
 
 
 
