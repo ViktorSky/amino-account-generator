@@ -272,12 +272,12 @@ class AccountGenerator:
         amino: object = Client(proxies=proxies)
         email = self.get_new_email(1)
         print(GREEN("\n~ Generating account for:"), email)
-        sleep(1)
+        sleep(2)
         password = self.get_new_password(10)
         print(GREEN("~ Password:"), "*" * len(password))
         nickname = self.get_new_nickname()
         amino.request_verify_code(email=email)
-        sleep(3.3)
+        sleep(4)
         captcha = self.get_captcha(email)
         print(GREEN("~ Captcha:"), captcha)
         code = self.captcha_solver(captcha)
@@ -393,6 +393,9 @@ if __name__ == "__main__":
             except StopIteration:
                 proxies: object = get_proxies()
                 proxy: str = next(proxies)
+            finally:
+                print(GREEN("~ Proxy updated:"), proxy)
+                sleep(3)
         except TooManyRequests as Error:
             print(RED("~ Error %d:" % Error.args[0]["api:statuscode"], Error.args[0]["api:message"]))
             sleep(5)
