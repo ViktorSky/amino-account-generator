@@ -151,7 +151,7 @@ class Client:
             "headers": self.headers(data = data),
             "method": method.upper(),
             "proxies": self.proxies or {},
-            "url": "https://service.narvii.com/api/v1/%s" % url
+            "url": "https://service.aminoapps.com/api/v1/%s" % url
         }
         with self.session.request(**kwargs) as response:
             if response.status_code != 200:
