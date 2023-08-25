@@ -27,7 +27,8 @@ def proxy_gen() -> str:
 
 
 def check(proxy) -> bool:
-    proxies = {"https": proxy}
+    proxy_url = "http://" + proxy if not proxy.startswith(("http://", "https://")) else proxy
+    proxies = {"https": proxy_url}
     with suppress(Exception):
         response = get(
             "https://api.ipify.org?format=json",
